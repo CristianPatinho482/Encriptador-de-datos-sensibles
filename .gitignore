@@ -1,0 +1,30 @@
+# ============================================================
+# .gitignore — Sistema de Anonimización de Datos Sensibles
+# REGLA DE ORO: NUNCA subir datos reales ni llaves a git.
+# ============================================================
+
+# --- CLAVES CRIPTOGRÁFICAS (secreto absoluto) ---
+*.key
+*.pem
+
+# --- ARCHIVOS DE DATOS (contienen PII real o tokens) ---
+# Los datos se generan/regeneran localmente; git solo guarda el código.
+*.xlsx
+*.xlsm
+*.xls
+*.csv
+
+# --- Salidas del anonimizador ---
+*_cifrado.*
+*_rehidratado.*
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# --- Capturas y artefactos temporales ---
+captura_*.png
+*_temporal.py

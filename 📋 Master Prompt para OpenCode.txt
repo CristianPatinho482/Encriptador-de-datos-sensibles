@@ -1,0 +1,34 @@
+### 📋 Master Prompt para OpenCode
+
+================================================================================
+MASTER PROMPT: SISTEMA UNIVERSAL DE ANONIMIZACIÓN Y REHIDRATACIÓN BIYECTIVA
+================================================================================
+
+1. QUIÉN SOY (ROL Y NIVEL DE EXPERIENCIA):
+Actúas como un Arquitecto de Software Senior y Criptógrafo especializado en Ingeniería de Datos, Privacidad y Desarrollo de Agentes de IA en OpenCode. Tu especialidad es diseñar programas en Python robustos, idempotentes y biyectivos que garanticen el cumplimiento de normativas de protección de datos personales (GDPR / Ley 1581 de Habeas Data).
+
+2. CONTEXTO DEL PROYECTO:
+La Coordinación de Etapa Productiva del SENA Centro ASTIN gestiona archivos de datos masivos (como "BASE DE DATOS ETAPA PRODUCTIVA.csv", reportes PE-04, PE-14, etc.). Estos archivos contienen información sensible personal identificable (PII) como nombres de aprendices, números de documento (DNI/cédulas), correos electrónicos y teléfonos de jefes o instructores. 
+Para poder procesar, analizar o construir automatizaciones en herramientas externas como OpenCode o modelos en la nube SIN exponer datos personales reales, necesitamos un software local universal que cifre los datos sensibles antes de exportarlos y permita desencriptarlos (rehidratarlos) exactamente al regresar con los resultados.
+
+3. TAREA EXACTA:
+Desarrollar una aplicación universal en Python con Interfaz Gráfica de Usuario (GUI interactiva con Tkinter) y soporte por línea de comandos (CLI) que permita:
+  a) Seleccionar cualquier archivo tabular (.csv o .xlsx).
+  b) Auto-detectar dinámicamente mediante patrones (palabras clave + expresiones regulares) las columnas que contienen PII sensible.
+  c) Desplegar una ventana de confirmación donde el usuario pueda marcar o desmarcar las columnas a proteger.
+  d) Cifrar biyectivamente los datos de las columnas seleccionadas y generar como resultado un Archivo Excel Cifrado (`<nombre>_cifrado.xlsx`) apto para procesar externamente, junto a su archivo de clave secreta y metadatos (`<nombre>_llave.key`).
+  e) Proveer el módulo inverso de "Rehidratación / Descifrado" que tome el archivo procesado en OpenCode junto a su `_llave.key` y restituya el 100% de la información real en texto claro.
+
+4. RESTRACCIONES Y REGLAS (MÉTODOS FORMALES Y ESTÁNDARES):
+- ESQUEMA CRIPTOGRÁFICO: Utiliza cifrado simétrico autenticado AES-256 en modo CBC con HMAC SHA-256 (vía `cryptography.fernet.Fernet`) o tokenización determinista HMAC-SHA256 para preservar consistencia de cruces.
+- BIYECTIVIDAD MATEMÁTICA: La función de cifrado f_K(x) debe garantizar estricta reversibilidad f_K⁻¹(f_K(x)) = x para todo registro.
+- INVARIANTE DE CERO FUGA (I₁): Ningún dato sensible en texto claro debe quedar expuesto en la hoja principal del Excel Cifrado.
+- PRESERVACIÓN DE ESTRUCTURA Y NULOS: Las columnas no sensibles (Fichas, Programas, Modalidades, Fechas, Estados) y los valores vacíos (NaN / None) deben permanecer intactos en su formato original.
+- CODIFICACIÓN Y RESILIENCIA: Forzar codificación UTF-8 con soporte para tildes (`utf-8-sig`) y manejo defensivo de errores de lectura de archivos Excel o CSV.
+
+5. FORMATO DE SALIDA:
+Generar un programa completo en Python (`app_anonimizador_universal.py`) que entregue:
+  1. Archivo principal cifrado: `[Nombre_Original]_cifrado.xlsx` (con hoja 'Datos_Protegidos').
+  2. Archivo de metadatos criptográficos: `[Nombre_Original]_llave.key` (clave Fernet + mapa JSON encriptado de columnas).
+  3. Módulo de prueba unitaria en Python para verificar la demostración matemática de rehidratación (100% coincidencia entre el original y el desencriptado).
+================================================================================
