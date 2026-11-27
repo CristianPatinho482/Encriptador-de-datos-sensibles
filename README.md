@@ -98,6 +98,30 @@ python generar_datos_demo.py
 Genera `BASE DE DATOS ETAPA PRODUCTIVA_DEMO.csv` (60 filas, datos ficticios con
 tildes, nulos y duplicados) para probar todo el flujo sin riesgo.
 
+### 3.4 Ejecutable de Windows (sin instalar Python)
+
+Para usuarios finales se genera un ejecutable de un clic con PyInstaller,
+con el ícono `assets/SOFIABOT.ico` embebido:
+
+| Archivo | Uso |
+|---|---|
+| `dist/AnonimizadorSENA.exe` | Interfaz gráfica (doble clic, sin consola) |
+| `dist/AnonimizadorSENA_CLI.exe` | Línea de comandos (`cifrar` / `rehidratar` / `detectar`) |
+| `Anonimizador SENA.lnk` | Lanzador con el ícono (ya quedó uno en el Escritorio) |
+
+Para recompilar después de modificar el código:
+
+```bat
+python -m pip install pyinstaller
+python -m PyInstaller --noconfirm --clean --onefile --windowed --name AnonimizadorSENA --icon "assets\SOFIABOT.ico" --add-data "assets\SOFIABOT.ico;assets" app_anonimizador_universal.py
+python -m PyInstaller --noconfirm --clean --onefile --console --name AnonimizadorSENA_CLI --icon "assets\SOFIABOT.ico" --add-data "assets\SOFIABOT.ico;assets" app_anonimizador_universal.py
+```
+
+> **Notas:** los `.exe` de PyInstaller suelen disparar avisos de SmartScreen o
+> del antivirus (falso positivo habitual); se recomienda agregar una excepción
+> o firmarlos digitalmente. Los `.exe`, `build/` y `dist/` **no se suben a git**
+> (están en `.gitignore`): se compilan localmente con el comando anterior.
+
 ---
 
 ## 4. Arquitectura criptográfica
@@ -199,5 +223,7 @@ archivos, no exposición de texto claro en el `.key`, y flujo CLI completo.
 | `test_anonimizador_universal.py` | Pruebas unitarias de biyectividad y seguridad |
 | `generar_datos_demo.py` | Generador de datos sintéticos de demostración |
 | `assets/SOFIABOT.ico` | Ícono de la ventana principal y de sus diálogos |
+| `dist/AnonimizadorSENA.exe` | Ejecutable Windows de un clic (PyInstaller; no va a git) |
+| `Anonimizador SENA.lnk` | Lanzador con ícono para el Escritorio |
 | `requirements.txt` | Dependencias Python |
 | `MEMORY.md` / `AGENTS.md` | Memoria del sistema y directivas del agente |
