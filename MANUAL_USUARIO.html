@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual de Usuario — Anonimizador SENA</title>
+<style>
+  :root {
+    --naranja: #e85d04;
+    --naranja-osc: #c14e03;
+    --azul: #1b3a5c;
+    --gris-fondo: #f6f7f9;
+    --borde: #dfe3e8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    color: #212529;
+    margin: 0;
+    background: var(--gris-fondo);
+    line-height: 1.55;
+  }
+  .pagina {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 0 0 14px rgba(0,0,0,.08);
+  }
+  header {
+    background: linear-gradient(120deg, var(--azul) 0%, #2b5a8c 70%, var(--naranja) 160%);
+    color: #fff;
+    padding: 34px 40px 26px;
+  }
+  header .kicker { font-size: .85rem; letter-spacing: 2px; opacity: .85; text-transform: uppercase; }
+  header h1 { margin: 6px 0 4px; font-size: 1.7rem; }
+  header .version { font-size: .95rem; opacity: .9; }
+  main { padding: 26px 40px 40px; }
+  h2 {
+    color: var(--azul);
+    border-bottom: 3px solid var(--naranja);
+    padding-bottom: 4px;
+    margin-top: 34px;
+    font-size: 1.25rem;
+  }
+  h3 { color: var(--naranja-osc); margin: 20px 0 6px; font-size: 1.05rem; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: .95rem; }
+  th, td { border: 1px solid var(--borde); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #eef2f6; color: var(--azul); }
+  code, pre {
+    font-family: Consolas, "Courier New", monospace;
+    background: #f0f2f5; border: 1px solid var(--borde);
+    border-radius: 4px; font-size: .9rem;
+  }
+  code { padding: 1px 5px; }
+  pre { padding: 10px 12px; overflow-x: auto; }
+  .paso { background: #fff8f0; border-left: 4px solid var(--naranja); padding: 10px 14px; margin: 10px 0; }
+  .alerta { background: #fdf0ef; border-left: 4px solid #c0392b; padding: 10px 14px; margin: 12px 0; }
+  .ok { background: #eff9f0; border-left: 4px solid #27ae60; padding: 10px 14px; margin: 12px 0; }
+  .flujo { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; margin: 14px 0; font-size: .88rem; }
+  .flujo .caja { flex: 1 1 180px; border: 1px solid var(--borde); border-radius: 6px; padding: 10px 12px; background: #fafbfc; }
+  .flujo .flecha { display: flex; align-items: center; color: var(--naranja); font-weight: bold; font-size: 1.3rem; }
+  .indice { background: #f0f4f8; border: 1px solid var(--borde); border-radius: 6px; padding: 12px 20px; margin-top: 18px; font-size: .95rem; }
+  .indice a { color: var(--azul); text-decoration: none; }
+  .indice a:hover { text-decoration: underline; }
+  footer { text-align: center; color: #6c757d; font-size: .85rem; padding: 18px 40px 26px; }
+  .btn-imprimir {
+    float: right; background: var(--naranja); color: #fff; border: 0;
+    border-radius: 6px; padding: 8px 16px; font-weight: bold; cursor: pointer;
+  }
+  .btn-imprimir:hover { background: var(--naranja-osc); }
+  @media print {
+    .btn-imprimir { display: none; }
+    body { background: #fff; }
+    .pagina { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="pagina">
+<header>
+  <button class="btn-imprimir" onclick="window.print()">Imprimir / Guardar PDF</button>
+  <div class="kicker">SENA · Centro ASTIN · Coordinación de Etapa Productiva</div>
+  <h1>Manual de Usuario — Anonimizador SENA</h1>
+  <div class="version">Sistema Universal de Anonimización y Rehidratación Biyectiva · Versión 1.0.0</div>
+</header>
+<main>
+
+<div class="indice">
+<strong>Contenido</strong><br>
+1. ¿Qué es y para qué sirve? · 2. Qué necesito · 3. Flujo de trabajo en 3 pasos ·
+4. Cifrar un archivo · 5. Rehidratar · 6. La llave: reglas de oro ·
+7. Columnas sensibles · 8. Línea de comandos (opcional) ·
+9. Solución de problemas · 10. Seguridad (Ley 1581) · 11. Preguntas frecuentes
+</div>
+
+<h2>1. ¿Qué es y para qué sirve?</h2>
+<p>Es una aplicación local que <strong>protege los datos personales</strong>
+(nombres, cédulas, correos, teléfonos) de archivos Excel o CSV
+<strong>antes</strong> de procesarlos en herramientas externas de inteligencia
+artificial (como OpenCode), y que <strong>restituye el 100&nbsp;% de la
+información real</strong> cuando los resultados regresan.</p>
+<p>Con este flujo, las herramientas externas trabajan con <em>tokens</em>
+(textos sin significado) y <strong>nunca ven los datos reales</strong> de los
+aprendices.</p>
+
+<h2>2. Qué necesito</h2>
+<div class="ok"><strong>Nada más que el archivo <code>AnonimizadorSENA.exe</code>.</strong>
+No necesita instalar Python ni ningún programa adicional. Funciona en
+Windows 10/11. Abra la aplicación con <strong>doble clic</strong>.</div>
+<div class="alerta">Si Windows muestra el aviso de <strong>SmartScreen</strong>
+("Windows protegió su equipo"), es un falso positivo habitual de los programas
+empaquetados. Haga clic en <strong>"Más información" → "Ejecutar de todas formas"</strong>.</div>
+
+<h2>3. El flujo de trabajo en 3 pasos</h2>
+<div class="flujo">
+  <div class="caja"><strong>1. CIFRAR</strong><br>BASE.csv → genera<br><code>BASE_cifrado.xlsx</code><br>+ <code>BASE_llave.key</code></div>
+  <div class="flecha">→</div>
+  <div class="caja"><strong>2. ANALIZAR (OpenCode)</strong><br>Solo se comparte el Excel cifrado (tokens, sin PII real)</div>
+  <div class="flecha">→</div>
+  <div class="caja"><strong>3. REHIDRATAR</strong><br>Se recuperan los datos reales:<br><code>BASE_rehidratado.xlsx</code></div>
+</div>
+<table>
+  <tr><th>Fase</th><th>Qué hace</th><th>Dónde</th></tr>
+  <tr><td>1. Cifrar</td><td>Convierte las columnas sensibles en tokens y genera la llave</td><td>Esta aplicación</td></tr>
+  <tr><td>2. Analizar</td><td>La herramienta externa trabaja con el Excel cifrado</td><td>OpenCode / nube</td></tr>
+  <tr><td>3. Rehidratar</td><td>Devuelve nombres y documentos reales al archivo final</td><td>Esta aplicación</td></tr>
+</table>
+
+<h2>4. Cifrar un archivo (paso a paso)</h2>
+<div class="paso"><strong>Paso 1.</strong> Abra <code>AnonimizadorSENA.exe</code>.
+Se abre la ventana y, automáticamente, el <strong>cuadro de diálogo para ubicar
+el archivo</strong>.</div>
+<div class="paso"><strong>Paso 2.</strong> Seleccione su archivo
+<code>.csv</code> o <code>.xlsx</code> (ej. <code>BASE DE DATOS ETAPA PRODUCTIVA.csv</code>).</div>
+<div class="paso"><strong>Paso 3.</strong> La aplicación <strong>detecta
+automáticamente las columnas con datos personales</strong> y las muestra con
+casillas de verificación (puede marcar o desmarcar). En <span style="color:#006600">verde</span>
+las detectadas como sensibles (quedan marcadas); en <span style="color:#777">gris</span> las no
+sensibles (Fichas, Programas, Fechas…).</div>
+<div class="paso"><strong>Paso 4.</strong> Revise la selección y haga clic en
+<strong>"Cifrar y generar Excel protegido"</strong>.</div>
+<div class="paso"><strong>Paso 5.</strong> Se generan <strong>dos archivos</strong>
+junto a su archivo original:</div>
+<table>
+  <tr><th>Archivo</th><th>Contenido</th><th>¿Se comparte?</th></tr>
+  <tr><td><code>NOMBRE_cifrado.xlsx</code></td><td>Hoja <code>Datos_Protegidos</code>: tokens sin datos reales + hoja <code>Metadatos</code></td><td><strong>SÍ</strong>, este va a OpenCode</td></tr>
+  <tr><td><code>NOMBRE_llave.key</code></td><td>Clave secreta + mapa para devolver los datos reales</td><td><strong>NUNCA</strong> — se guarda localmente</td></tr>
+</table>
+
+<h2>5. Rehidratar (recuperar los datos reales)</h2>
+<p>Cuando OpenCode devuelva el archivo procesado:</p>
+<div class="paso"><strong>Paso 1.</strong> Abra la pestaña
+<strong>"Rehidratar / Descifrar"</strong>.</div>
+<div class="paso"><strong>Paso 2.</strong> Seleccione el <strong>archivo
+procesado</strong> (el que devolvió OpenCode). La llave se busca automáticamente
+junto al archivo; si no aparece, selecciónela con el botón "Examinar...".</div>
+<div class="paso"><strong>Paso 3.</strong> Haga clic en
+<strong>"Rehidratar y restituir información real"</strong>.</div>
+<div class="paso"><strong>Paso 4.</strong> Se genera
+<code>NOMBRE_rehidratado.xlsx</code> y la aplicación verifica automáticamente:</div>
+<div class="ok"><strong>"100 % de coincidencia"</strong>: todo se restauró
+correctamente. ✔</div>
+<div class="alerta">Si no da 100 %, revise los avisos (ver sección 9).</div>
+
+<h2>6. La llave: reglas de oro 🔑</h2>
+<ol>
+  <li><strong>La llave es el único secreto.</strong> Sin ella, los tokens son irrecuperables.</li>
+  <li><strong>Guárdela en lugar seguro</strong> (carpeta restringida o disco cifrado).</li>
+  <li><strong>Nunca</strong> la suba a la nube, al chat ni al correo.</li>
+  <li><strong>Haga copia de seguridad.</strong> Si la llave se pierde, no hay forma de recuperar los datos reales de ese cifrado.</li>
+  <li><strong>Cruces entre reportes:</strong> para cruzar dos archivos cifrados
+  (ej. PE-04 con PE-14), cifre ambos <strong>reutilizando la misma llave</strong>
+  (opción "Reutilizar llave maestra" en la GUI). Así, el mismo documento produce
+  el mismo token en ambos archivos.</li>
+</ol>
+
+<h2>7. Columnas sensibles: cómo se detectan</h2>
+<p>La aplicación combina <strong>palabras clave</strong> y <strong>patrones</strong>:</p>
+<ul>
+  <li><strong>Nombres:</strong> <code>nombre</code>, <code>apellido</code>, <code>aprendiz</code>, <code>jefe inmediato</code>, <code>responsable</code>…</li>
+  <li><strong>Documentos:</strong> <code>documento</code>, <code>cédula</code>, <code>identificación</code>, <code>dni</code>, <code>nit</code>…</li>
+  <li><strong>Contacto:</strong> <code>correo</code>, <code>email</code>, <code>teléfono</code>, <code>celular</code>, <code>dirección</code>…</li>
+  <li><strong>Patrones:</strong> números de 7–10 dígitos, correos electrónicos, teléfonos.</li>
+</ul>
+<p>Columnas como <code>FICHA</code>, <code>PROGRAMA</code>, <code>MODALIDAD</code>,
+<code>ESTADO</code> y <code>FECHA</code> se <strong>excluyen automáticamente</strong>
+y quedan intactas en el archivo cifrado. Si la detección no es perfecta, ajuste
+las casillas antes de cifrar.</p>
+
+<h2>8. Uso por línea de comandos (opcional)</h2>
+<pre>AnonimizadorSENA_CLI.exe detectar "BASE.csv"
+AnonimizadorSENA_CLI.exe cifrar "BASE.csv" --si
+AnonimizadorSENA_CLI.exe rehidratar "BASE_cifrado.xlsx"</pre>
+<p><em>Para usuarios avanzados; la interfaz gráfica cubre todo el flujo.</em></p>
+
+<h2>9. Solución de problemas</h2>
+<table>
+  <tr><th>Mensaje / situación</th><th>Qué hacer</th></tr>
+  <tr><td>SmartScreen o antivirus bloquea el <code>.exe</code></td><td>"Más información" → "Ejecutar de todas formas" (falso positivo)</td></tr>
+  <tr><td>"El archivo está abierto en otro programa (p. ej. Excel)"</td><td>Cierre el archivo en Excel y repita</td></tr>
+  <tr><td>"La verificación NO dio 100 %" con tokens desconocidos</td><td>OpenCode modificó o agregó datos: los valores originales sí se restauraron; revise los tokens señalados</td></tr>
+  <tr><td>"La columna PII … no está en el archivo procesado"</td><td>OpenCode eliminó esa columna; el resto se restaura normal</td></tr>
+  <tr><td>Archivo <code>.xls</code> antiguo no se lee</td><td>Conviértalo a <code>.xlsx</code> o <code>.csv</code> en Excel</td></tr>
+  <tr><td>CSV que no se abre</td><td>Se soportan codificaciones UTF-8 y latin-1; separador auto-detectado (coma o punto y coma)</td></tr>
+</table>
+
+<h2>10. Seguridad y protección de datos (Ley 1581 de 2012)</h2>
+<ul>
+  <li>Comparta con OpenCode <strong>únicamente</strong> el archivo <code>_cifrado.xlsx</code>.</li>
+  <li>Los tokens no revelan nombres ni documentos reales; la llave es lo único que permite volver al texto claro.</li>
+  <li>Si una llave o una base real llegara a exponerse, repórtelo al encargado de protección de datos del SENA como incidente de seguridad.</li>
+  <li>Si una llave se expuso, considérela comprometida: genere una nueva y vuelva a cifrar.</li>
+</ul>
+
+<h2>11. Preguntas frecuentes</h2>
+<p><strong>¿Puedo procesar cualquier archivo?</strong><br>
+Sí: cualquier <code>.csv</code> o <code>.xlsx</code>; la detección se adapta a las columnas.</p>
+<p><strong>¿Los valores vacíos se pierden?</strong><br>
+No. Las celdas vacías y las columnas no sensibles quedan intactas.</p>
+<p><strong>¿Dos cifrados del mismo archivo dan el mismo resultado?</strong><br>
+Sí, si reutiliza la misma llave maestra; con llaves nuevas los tokens cambian.</p>
+<p><strong>¿Qué pasa si pierdo la llave?</strong><br>
+Los datos cifrados con ella no se pueden recuperar. Por eso: copia de seguridad de toda llave generada.</p>
+<p><strong>¿El programa envía datos a internet?</strong><br>
+No. Todo el procesamiento es 100 % local.</p>
+
+</main>
+<footer>
+  Documento interno SENA — Centro ASTIN · Manual versión 1.0.0 · Aplicación versión 1.0.0
+</footer>
+</div>
+</body>
+</html>

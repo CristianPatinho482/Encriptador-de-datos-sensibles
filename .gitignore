@@ -29,6 +29,9 @@ venv/
 captura_*.png
 *_temporal.py
 
+# --- Paquetes de distribución (se generan localmente) ---
+*.zip
+
 # --- PyInstaller (artefactos de compilación; el .exe no va a git) ---
 build/
 dist/

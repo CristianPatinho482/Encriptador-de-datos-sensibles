@@ -1,0 +1,36 @@
+================================================================
+ ANONIMIZADOR SENA — v1.0.0
+ Sistema Universal de Anonimización y Rehidratación Biyectiva
+ SENA - Centro ASTIN · Coordinación de Etapa Productiva
+================================================================
+
+PARA EMPEZAR
+------------
+1. Abra "AnonimizadorSENA.exe" con doble clic.
+   (No necesita instalar Python ni ningún otro programa.)
+
+2. Si Windows muestra el aviso de SmartScreen, haga clic en
+   "Más información" -> "Ejecutar de todas formas" (falso positivo).
+
+3. Lea "MANUAL_USUARIO.html" (ábralo con doble clic en cualquier
+   navegador) para conocer el flujo completo:
+
+   CIFRAR  ->  analizar el Excel cifrado en OpenCode  ->  REHIDRATAR
+
+REGLAS DE ORO
+-------------
+* Comparta SOLO el archivo "_cifrado.xlsx" con herramientas externas.
+* La "_llave.key" es el único secreto: guárdela segura, haga respaldo
+  y NUNCA la suba a la nube, al chat ni al correo.
+* Si pierde la llave, los datos cifrados con ella no se pueden recuperar.
+* Todo el procesamiento es 100 % local: el programa no envía datos a
+  internet.
+
+CONTENIDO DEL PAQUETE
+---------------------
+  AnonimizadorSENA.exe   Aplicación (interfaz gráfica, un clic)
+  MANUAL_USUARIO.html    Manual completo (abrir en el navegador)
+  LEEME.txt              Este archivo
+
+Protección de datos conforme a la Ley 1581 de 2012.
+================================================================

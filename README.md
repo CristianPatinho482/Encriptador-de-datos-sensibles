@@ -122,6 +122,13 @@ python -m PyInstaller --noconfirm --clean --onefile --console --name Anonimizado
 > o firmarlos digitalmente. Los `.exe`, `build/` y `dist/` **no se suben a git**
 > (están en `.gitignore`): se compilan localmente con el comando anterior.
 
+**Kit para compartir:** `AnonimizadorSENA_v1.0.0_Windows.zip` contiene el
+ejecutable, el manual (`MANUAL_USUARIO.html`) y un `LEEME.txt`. Para un usuario
+final basta entregar ese ZIP (o solo el `.exe` + el manual). El **manual de
+usuario** (`MANUAL_USUARIO.md` / `MANUAL_USUARIO.html`) explica el flujo
+cifrar → analizar → rehidratar, las reglas de la llave y la solución de
+problemas.
+
 ---
 
 ## 4. Arquitectura criptográfica
@@ -223,7 +230,10 @@ archivos, no exposición de texto claro en el `.key`, y flujo CLI completo.
 | `test_anonimizador_universal.py` | Pruebas unitarias de biyectividad y seguridad |
 | `generar_datos_demo.py` | Generador de datos sintéticos de demostración |
 | `assets/SOFIABOT.ico` | Ícono de la ventana principal y de sus diálogos |
+| `MANUAL_USUARIO.md` / `MANUAL_USUARIO.html` | Manual de usuario (HTML para abrir en el navegador) |
+| `LEEME.txt` | Instrucciones rápidas para el kit de distribución |
 | `dist/AnonimizadorSENA.exe` | Ejecutable Windows de un clic (PyInstaller; no va a git) |
 | `Anonimizador SENA.lnk` | Lanzador con ícono para el Escritorio |
+| `AnonimizadorSENA_v1.0.0_Windows.zip` | Kit de distribución listo para compartir (no va a git) |
 | `requirements.txt` | Dependencias Python |
 | `MEMORY.md` / `AGENTS.md` | Memoria del sistema y directivas del agente |
